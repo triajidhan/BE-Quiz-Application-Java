@@ -142,6 +142,7 @@ DELETE /user-candidates/{id}
   "message": "string"
 }
 ```
+-------
 
 ### Questions
 #### Request
@@ -301,6 +302,53 @@ PUT /questions
   "data": {
     "version": 0
   },
+  "message": "string"
+}
+```
+-------
+
+### Answers
+#### Request
+```http
+PUT /answers
+```
+#### Request Body
+```
+{
+  "id": "string",
+  "answer": "string",
+  "version": 0
+}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `UUID string` | **Required**. Answer id to edit|
+| `answer`      | `string` | **Required**. Answer|
+| `version`      | `integer` | **Required**. Answer version|
+
+#### Response
+```
+{
+  "data": {
+    "version": 0
+  },
+  "message": "string"
+}
+```
+-------
+#### Request
+```http
+DELETE /answers/{id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `UUID string` | **Required**. Answer id to fetch|
+
+#### Response
+```
+{
   "message": "string"
 }
 ```
