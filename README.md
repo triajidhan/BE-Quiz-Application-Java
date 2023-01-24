@@ -437,7 +437,7 @@ GET /reports/user-candidates?id=
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `id`      | `string` | **Required, Case-Insensitive**. User candidate id to filter query|
-```
+
 #### Response
 ```
 {
