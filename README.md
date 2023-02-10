@@ -21,12 +21,42 @@ git clone https://github.com/triajidhan/BE-Quiz-Application.git
   - Make sure the database setting at application.properties are correct.
   - You can use other name, but you need to change the datasource in the application.properties.
 - Run the project. Upon the first run, the tables will automatically created in the previously created database.
+- Register user candidate using ``` POST /user-candidates ```, then login using ``` POST /login ```
 
 ## API Documentation
 Swagger Open API Documentation. To use this, you must run the application.
 ```
 http://localhost:8080/swagger-ui/index.html
 ```
+### Login
+#### Request
+```http
+POST /login
+```
+#### Request Body
+```
+{
+  "userName": "string",
+  "password": "string"
+}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `userName`      | `string` | **Required**. User candidate username|
+| `password`      | `string` | **Required**. User candidate password|
+
+#### Response
+```
+{
+  "id": "string",
+  "fullName": "string",
+  "token": "string",
+  "userName": "string",
+  "email": "string"
+}
+```
+-------
 ### User Candidates
 #### Request
 ```http
@@ -39,6 +69,7 @@ GET /user-candidates
     {
       "id": "string",
       "fullName": "string",
+      "userName": "string",
       "email": "string",
       "version": 0,
       "isActive": true
@@ -62,6 +93,7 @@ GET /user-candidates/{id}
   "data": {
     "id": "string",
     "fullName": "string",
+    "userName": "string",
     "email": "string",
     "version": 0,
     "isActive": true
@@ -77,6 +109,8 @@ POST /user-candidates
 ```
 {
   "fullName": "string",
+  "userName": "string",
+  "password": "string",
   "email": "string"
 }
 ```
@@ -84,6 +118,8 @@ POST /user-candidates
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
 | `fullName`      | `string` | **Required**. User candidate fullname|
+| `userName`      | `string` | **Required**. User candidate username|
+| `password`      | `string` | **Required**. User candidate password|
 | `email`      | `string` | **Required**. User candidate email|
 
 #### Response
