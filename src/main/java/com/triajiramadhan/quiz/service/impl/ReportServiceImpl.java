@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.triajiramadhan.quiz.dao.AnswerDao;
 import com.triajiramadhan.quiz.dao.ReportDao;
 import com.triajiramadhan.quiz.dao.SubmissionDao;
-import com.triajiramadhan.quiz.dao.UserCandidateDao;
+import com.triajiramadhan.quiz.dao.UserDao;
 import com.triajiramadhan.quiz.dto.answer.AnswerDataDto;
 import com.triajiramadhan.quiz.dto.base.BaseDataGetResDto;
 import com.triajiramadhan.quiz.dto.base.BaseDataInsertResDto;
@@ -25,7 +25,7 @@ import com.triajiramadhan.quiz.dto.submission.SubmissionDataDto;
 import com.triajiramadhan.quiz.model.Answer;
 import com.triajiramadhan.quiz.model.Report;
 import com.triajiramadhan.quiz.model.Submission;
-import com.triajiramadhan.quiz.model.UserCandidate;
+import com.triajiramadhan.quiz.model.User;
 import com.triajiramadhan.quiz.service.ReportService;
 
 @Service
@@ -34,7 +34,7 @@ public class ReportServiceImpl implements ReportService {
 	@Autowired
 	private ReportDao reportDao;
 	@Autowired
-	private UserCandidateDao userCandidateDao;
+	private UserDao userCandidateDao;
 	@Autowired
 	private AnswerDao answerDao;
 	@Autowired
@@ -45,7 +45,7 @@ public class ReportServiceImpl implements ReportService {
 	public BaseInsertResDto insert(ReportInsertReqDto data) {
 		final BaseDataInsertResDto baseDataInsertResDto = new BaseDataInsertResDto();
 		final BaseInsertResDto baseInsertResDto = new BaseInsertResDto();
-		final Optional<UserCandidate> optionalUserCandidate = userCandidateDao.getById(data.getUserCandidateId());
+		final Optional<User> optionalUserCandidate = userCandidateDao.getById(data.getUserCandidateId());
 		
 		Report reportInsert = new Report();
 		reportInsert.setUserCandidate(optionalUserCandidate.get());

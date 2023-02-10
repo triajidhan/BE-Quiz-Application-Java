@@ -1,11 +1,13 @@
-package com.triajiramadhan.quiz.dto.usercandidate;
+package com.triajiramadhan.quiz.dto.user;
 
-public class UserCandidateDataDto {
+public class UserDataDto {
 
 	private String id;
 	private String fullName;
 	private String userName;
 	private String email;
+	private String roleName;
+	private String roleCode;
 	private Integer version;
 	private Boolean isActive;
 	
@@ -13,6 +15,22 @@ public class UserCandidateDataDto {
 		return id;
 	}
 	
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
+
 	public void setId(String id) {
 		this.id = id;
 	}

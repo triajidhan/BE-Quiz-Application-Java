@@ -6,13 +6,13 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "t_user_candidate", uniqueConstraints = 
+@Table(name = "t_user", uniqueConstraints = 
 		@UniqueConstraint(
-				name = "user_candidate_ck",
+				name = "user_ck",
 				columnNames = {"user_name", "email"}
 			)
 	)
-public class UserCandidate extends BaseModel {
+public class User extends BaseModel {
 
 	@Column(name = "full_name", nullable = false, length = 50)
 	private String fullName;
@@ -25,9 +25,20 @@ public class UserCandidate extends BaseModel {
 	
 	@Column(name = "email", unique = true, nullable = false, length = 50)
 	private String email;
+	
+	@Column(name = "role_code", nullable = false, length = 3)
+	private String roleCode;
 
 	public String getFullName() {
 		return fullName;
+	}
+
+	public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
 	}
 
 	public void setFullName(String fullName) {

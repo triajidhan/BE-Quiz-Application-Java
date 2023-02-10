@@ -5,6 +5,8 @@ public class LoginResDto {
 	private String id;
 	private String fullName;
 	private String token;
+	private String roleCode;
+	private String roleName;
 	private String userName;
 	private String email;
 	
@@ -20,6 +22,22 @@ public class LoginResDto {
 		return fullName;
 	}
 	
+	public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}

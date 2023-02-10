@@ -20,49 +20,49 @@ import com.triajiramadhan.quiz.dto.base.BaseDataGetResDto;
 import com.triajiramadhan.quiz.dto.base.BaseDeleteResDto;
 import com.triajiramadhan.quiz.dto.base.BaseInsertResDto;
 import com.triajiramadhan.quiz.dto.base.BaseUpdateResDto;
-import com.triajiramadhan.quiz.dto.usercandidate.UserCandidateDataDto;
-import com.triajiramadhan.quiz.dto.usercandidate.UserCandidateInsertReqDto;
-import com.triajiramadhan.quiz.dto.usercandidate.UserCandidateUpdateReqDto;
-import com.triajiramadhan.quiz.service.UserCandidateService;
+import com.triajiramadhan.quiz.dto.user.UserDataDto;
+import com.triajiramadhan.quiz.dto.user.UserInsertReqDto;
+import com.triajiramadhan.quiz.dto.user.UserUpdateReqDto;
+import com.triajiramadhan.quiz.service.UserService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 
 @SecurityRequirement(name = "bearerAuth")
 @RestController
-@RequestMapping("user-candidates")
-public class UserCandidateController {
+@RequestMapping("users")
+public class UserController {
 
 	@Autowired
-	private UserCandidateService userCandidateService;
+	private UserService userService;
 	
 	@PostMapping
-	public ResponseEntity<BaseInsertResDto> insert(@Valid @RequestBody  final UserCandidateInsertReqDto data) {
-		final BaseInsertResDto insertRes = userCandidateService.insert(data);
+	public ResponseEntity<BaseInsertResDto> insert(@Valid @RequestBody  final UserInsertReqDto data) {
+		final BaseInsertResDto insertRes = userService.insert(data);
 		return new ResponseEntity<>(insertRes, HttpStatus.CREATED);
 	}
 	
 	@PutMapping
-	public ResponseEntity<BaseUpdateResDto> update(@Valid @RequestBody  final UserCandidateUpdateReqDto data) {
-		final BaseUpdateResDto updateRes = userCandidateService.update(data);
+	public ResponseEntity<BaseUpdateResDto> update(@Valid @RequestBody  final UserUpdateReqDto data) {
+		final BaseUpdateResDto updateRes = userService.update(data);
 		return new ResponseEntity<>(updateRes, HttpStatus.OK);
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<BaseDataGetResDto<UserCandidateDataDto>> getById(@PathVariable("id") final String id) {
-		final BaseDataGetResDto<UserCandidateDataDto> userCandidate = userCandidateService.getById(id);
-		return new ResponseEntity<>(userCandidate, HttpStatus.OK);
+	public ResponseEntity<BaseDataGetResDto<UserDataDto>> getById(@PathVariable("id") final String id) {
+		final BaseDataGetResDto<UserDataDto> user = userService.getById(id);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("{id}")
 	public ResponseEntity<BaseDeleteResDto> delete(@PathVariable("id")  final String id) {
-		final BaseDeleteResDto deleteRes = userCandidateService.deleteById(id);
+		final BaseDeleteResDto deleteRes = userService.deleteById(id);
 		return new ResponseEntity<>(deleteRes, HttpStatus.OK);
 	}
 	
 	@GetMapping
-	public ResponseEntity<BaseDataGetResDto<List<UserCandidateDataDto>>> getAll() {
-		final BaseDataGetResDto<List<UserCandidateDataDto>> userCandidates = userCandidateService.getAll();
-		return new ResponseEntity<>(userCandidates, HttpStatus.OK);
+	public ResponseEntity<BaseDataGetResDto<List<UserDataDto>>> getAll() {
+		final BaseDataGetResDto<List<UserDataDto>> users = userService.getAll();
+		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 }

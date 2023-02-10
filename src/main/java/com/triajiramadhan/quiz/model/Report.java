@@ -15,7 +15,7 @@ public class Report extends BaseModel {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_candidate_id", nullable = false)
-	private UserCandidate userCandidate;
+	private User userCandidate;
 
 	public Double getScore() {
 		return score;
@@ -25,11 +25,11 @@ public class Report extends BaseModel {
 		this.score = score;
 	}
 
-	public UserCandidate getUserCandidate() {
+	public User getUserCandidate() {
 		return userCandidate;
 	}
 
-	public void setUserCandidate(UserCandidate userCandidate) {
+	public void setUserCandidate(User userCandidate) {
 		this.userCandidate = userCandidate;
 	}
 }
