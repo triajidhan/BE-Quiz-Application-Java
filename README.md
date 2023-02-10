@@ -21,7 +21,7 @@ git clone https://github.com/triajidhan/BE-Quiz-Application.git
   - Make sure the database setting at application.properties are correct.
   - You can use other name, but you need to change the datasource in the application.properties.
 - Run the project. Upon the first run, the tables will automatically created in the previously created database.
-- register user candidate using ```http POST /user-candidates ```, then login using ```http POST /login ```
+- register user candidate using ``` POST /user-candidates ```, then login using ``` POST /login ```
 
 ## API Documentation
 Swagger Open API Documentation. To use this, you must run the application.
