@@ -19,14 +19,14 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.triajiramadhan.quiz.filter.AuthorizationFilter;
-import com.triajiramadhan.quiz.service.UserCandidateService;
+import com.triajiramadhan.quiz.service.UserService;
 
 @Configuration
 public class SecurityConfig {
 
 	@Bean
 	public AuthenticationManager authenticationManager(final HttpSecurity http, final PasswordEncoder passwordEncoder,
-			final UserCandidateService userCandidateService) throws Exception {
+			final UserService userCandidateService) throws Exception {
 		return http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(userCandidateService)
 				.passwordEncoder(passwordEncoder).and().build();
 	}
@@ -34,7 +34,7 @@ public class SecurityConfig {
 	@Bean
 	public List<RequestMatcher> requestMatchers() {
 		final List<RequestMatcher> matchers = new ArrayList<>();
-		matchers.add(new AntPathRequestMatcher("/user-candidates/**", HttpMethod.POST.name()));
+		matchers.add(new AntPathRequestMatcher("/users/**", HttpMethod.POST.name()));
 		matchers.add(new AntPathRequestMatcher("/login/**", HttpMethod.POST.name()));
 		matchers.add(new AntPathRequestMatcher("/swagger-ui/**", HttpMethod.GET.name()));
 		matchers.add(new AntPathRequestMatcher("/v3/**", HttpMethod.GET.name()));
@@ -59,7 +59,7 @@ public class SecurityConfig {
 		return new WebMvcConfigurer() {
 		@Override
 		public void addCorsMappings(CorsRegistry registry) {
-			registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowedMethods(HttpMethod.GET.toString(),
+			registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods(HttpMethod.GET.toString(),
 					HttpMethod.POST.toString(), HttpMethod.PUT.toString(), HttpMethod.DELETE.toString());
 			WebMvcConfigurer.super.addCorsMappings(registry);
 		}

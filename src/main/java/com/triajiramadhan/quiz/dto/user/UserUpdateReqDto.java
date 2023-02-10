@@ -1,9 +1,9 @@
-package com.triajiramadhan.quiz.dto.usercandidate;
+package com.triajiramadhan.quiz.dto.user;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class UserCandidateUpdateReqDto {
+public class UserUpdateReqDto {
 
 	@NotBlank(message = "field required")
 	private String id;

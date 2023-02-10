@@ -1,8 +1,8 @@
-package com.triajiramadhan.quiz.dto.usercandidate;
+package com.triajiramadhan.quiz.dto.user;
 
 import javax.validation.constraints.NotBlank;
 
-public class UserCandidateInsertReqDto {
+public class UserInsertReqDto {
 
 	@NotBlank(message = "field required")
 	private String fullName;
@@ -15,6 +15,17 @@ public class UserCandidateInsertReqDto {
 	
 	@NotBlank(message = "field required")
 	private String email;
+	
+	@NotBlank(message = "field required")
+	private String roleCode;
+
+	public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
 
 	public String getFullName() {
 		return fullName;
