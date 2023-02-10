@@ -23,6 +23,9 @@ import com.triajiramadhan.quiz.dto.question.QuestionInsertReqDto;
 import com.triajiramadhan.quiz.dto.question.QuestionUpdateReqDto;
 import com.triajiramadhan.quiz.service.QuestionService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("questions")
 public class QuestionController {

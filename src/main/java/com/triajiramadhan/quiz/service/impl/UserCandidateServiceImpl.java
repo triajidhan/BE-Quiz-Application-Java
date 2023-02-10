@@ -7,6 +7,9 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.triajiramadhan.quiz.dao.UserCandidateDao;
@@ -27,6 +30,8 @@ public class UserCandidateServiceImpl implements UserCandidateService {
 	
 	@Autowired
 	private UserCandidateDao userCandidateDao;
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 
 	@Override
 	@Transactional(rollbackOn = Exception.class)
@@ -37,6 +42,9 @@ public class UserCandidateServiceImpl implements UserCandidateService {
 		UserCandidate userCandidateInsert = new UserCandidate();
 		userCandidateInsert.setFullName(data.getFullName());
 		userCandidateInsert.setEmail(data.getEmail());
+		userCandidateInsert.setUserName(data.getUserName());
+		final String hashPwd = passwordEncoder.encode(data.getPassword());
+		userCandidateInsert.setPassword(hashPwd);
 		userCandidateInsert = userCandidateDao.insert(userCandidateInsert);
 		
 		baseDataInsertResDto.setId(userCandidateInsert.getId());		
@@ -83,6 +91,7 @@ public class UserCandidateServiceImpl implements UserCandidateService {
 		if(optional.isPresent()) {
 			userCandidateDataDto.setFullName(optional.get().getFullName());
 			userCandidateDataDto.setEmail(optional.get().getEmail());
+			userCandidateDataDto.setUserName(optional.get().getUserName());
 			userCandidateDataDto.setId(optional.get().getId());
 			userCandidateDataDto.setVersion(optional.get().getVersion());
 			userCandidateDataDto.setIsActive(optional.get().getIsActive());
@@ -115,6 +124,7 @@ public class UserCandidateServiceImpl implements UserCandidateService {
 				UserCandidateDataDto userCandidateDataDto = new UserCandidateDataDto();
 				userCandidateDataDto.setFullName(userCandidate.getFullName());
 				userCandidateDataDto.setEmail(userCandidate.getEmail());
+				userCandidateDataDto.setUserName(userCandidate.getUserName());
 				userCandidateDataDto.setId(userCandidate.getId());
 				userCandidateDataDto.setVersion(userCandidate.getVersion());
 				userCandidateDataDto.setIsActive(userCandidate.getIsActive());
@@ -123,6 +133,22 @@ public class UserCandidateServiceImpl implements UserCandidateService {
 		}
 		baseDataGetResDto.setData(userCandidateDataDtos);
 		return baseDataGetResDto;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(final String userName) throws UsernameNotFoundException {
+		final Optional<UserCandidate> userOptional = userCandidateDao.getByUserName(userName);
+		if (userOptional.isPresent()) {
+			return new org.springframework.security.core.userdetails
+					.User(userName, userOptional.get().getPassword(), 
+					new ArrayList<>());
+		}
+		throw new  UsernameNotFoundException("Wrong Username or Password");
+	}
+
+	@Override
+	public Optional<UserCandidate> getByUserName(final String userName) {
+		return userCandidateDao.getByUserName(userName);
 	}
 
 }

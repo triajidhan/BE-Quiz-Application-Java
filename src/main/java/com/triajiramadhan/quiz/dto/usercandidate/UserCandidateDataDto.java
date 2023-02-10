@@ -4,6 +4,7 @@ public class UserCandidateDataDto {
 
 	private String id;
 	private String fullName;
+	private String userName;
 	private String email;
 	private Integer version;
 	private Boolean isActive;
@@ -20,6 +21,14 @@ public class UserCandidateDataDto {
 		return fullName;
 	}
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}

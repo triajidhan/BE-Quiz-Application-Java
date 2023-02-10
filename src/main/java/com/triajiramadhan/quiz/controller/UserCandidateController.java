@@ -25,8 +25,10 @@ import com.triajiramadhan.quiz.dto.usercandidate.UserCandidateInsertReqDto;
 import com.triajiramadhan.quiz.dto.usercandidate.UserCandidateUpdateReqDto;
 import com.triajiramadhan.quiz.service.UserCandidateService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("user-candidates")
 public class UserCandidateController {

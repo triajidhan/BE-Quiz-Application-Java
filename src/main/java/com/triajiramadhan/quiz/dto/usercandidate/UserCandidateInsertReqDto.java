@@ -8,6 +8,12 @@ public class UserCandidateInsertReqDto {
 	private String fullName;
 	
 	@NotBlank(message = "field required")
+	private String userName;
+	
+	@NotBlank(message = "field required")
+	private String password;
+	
+	@NotBlank(message = "field required")
 	private String email;
 
 	public String getFullName() {
@@ -16,6 +22,22 @@ public class UserCandidateInsertReqDto {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {

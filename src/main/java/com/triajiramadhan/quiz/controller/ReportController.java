@@ -21,6 +21,9 @@ import com.triajiramadhan.quiz.dto.report.ReportDataDto;
 import com.triajiramadhan.quiz.dto.report.ReportInsertReqDto;
 import com.triajiramadhan.quiz.service.ReportService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("reports")
 public class ReportController {

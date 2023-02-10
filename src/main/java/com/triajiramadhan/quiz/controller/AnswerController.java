@@ -17,6 +17,9 @@ import com.triajiramadhan.quiz.dto.base.BaseDeleteResDto;
 import com.triajiramadhan.quiz.dto.base.BaseUpdateResDto;
 import com.triajiramadhan.quiz.service.AnswerService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("answers")
 public class AnswerController {

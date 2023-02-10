@@ -2,7 +2,9 @@ package com.triajiramadhan.quiz.dao.impl;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.stereotype.Repository;
+
 import com.triajiramadhan.quiz.dao.UserCandidateDao;
 import com.triajiramadhan.quiz.model.UserCandidate;
 
@@ -43,6 +45,22 @@ public class UserCandidateDaoImpl extends BaseDaoImpl implements UserCandidateDa
 		final String sql = " DELETE FROM t_user_candidate WHERE id = :id ";
 		final int result = this.em.createNativeQuery(sql).setParameter("id", id).executeUpdate();
 		return result > 0;
+	}
+	
+	@Override
+	public Optional<UserCandidate> getByUserName(final String userName) {
+		final String sql = " SELECT * FROM t_user_candidate WHERE user_name = :userName AND is_active = true";
+
+		UserCandidate userCandidate = null;
+		try {
+			userCandidate = (UserCandidate) this.em.createNativeQuery(sql, UserCandidate.class)
+					.setParameter("userName", userName)
+					.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return Optional.ofNullable(userCandidate);
 	}
 
 }
