@@ -22,7 +22,7 @@ git clone https://github.com/triajidhan/BE-Quiz-Application.git
   - Make sure the database setting at application.properties are correct.
   - You can use other name, but you need to change the datasource in the application.properties.
 - Run the project. Upon the first run, the tables will automatically created in the previously created database.
-- Register user candidate using ``` POST /user-candidates ```, if you want to register as admin, fill in ``` userRole: "ADM" ```. If as a candidate user, fill in  ``` userRole: "CDT" ```
+- Register user candidate using ``` POST /user-candidates ```, if you want to register as admin, fill in ``` roleCode: "ADM" ```. If as a candidate user, fill in  ``` roleCode: "CDT" ```
 - Then login using ``` POST /login ```
 
 ## API Documentation
