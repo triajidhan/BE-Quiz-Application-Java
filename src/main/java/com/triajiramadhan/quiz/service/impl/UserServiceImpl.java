@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService {
 					userUpdate.setFullName(data.getFullName());
 					userUpdate.setIsActive(data.getIsActive());
 					userUpdate = userDao.update(userUpdate);
+					baseDataUpdateResDto.setId(userUpdate.getId());
 					baseDataUpdateResDto.setVersion(userUpdate.getVersion());
 					baseUpdateResDto.setData(baseDataUpdateResDto);
 					baseUpdateResDto.setMessage("Updating User Success!");					

@@ -9,7 +9,7 @@ public class AnswerInsertReqDto {
 	private String answer;
 	
 	@NotNull(message = "field required")
-	private Boolean answerKey;
+	private Boolean isAnswer;
 
 	public String getAnswer() {
 		return answer;
@@ -19,11 +19,11 @@ public class AnswerInsertReqDto {
 		this.answer = answer;
 	}
 
-	public Boolean getAnswerKey() {
-		return answerKey;
+	public Boolean getIsAnswer() {
+		return isAnswer;
 	}
 
-	public void setAnswerKey(Boolean answerKey) {
-		this.answerKey = answerKey;
+	public void setIsAnswer(Boolean isAnswer) {
+		this.isAnswer = isAnswer;
 	}
 }

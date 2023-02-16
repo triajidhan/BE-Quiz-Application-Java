@@ -27,33 +27,38 @@ import com.triajiramadhan.quiz.service.JwtService;
 public class AuthorizationFilter extends OncePerRequestFilter {
 
 	@Autowired
-	private JwtService jwtService;	
+	private JwtService jwtService;
 	@Autowired
 	private List<RequestMatcher> requestMatchers;
 	@Autowired
 	private ObjectMapper objectMapper;
-	
+
 	@Override
-	protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain)
-			throws ServletException, IOException {
-		final Long count = requestMatchers.stream().filter(m->m.matches(request)).collect(Collectors.counting());
-		
+	protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
+			final FilterChain filterChain) throws ServletException, IOException {
+		final Long count = requestMatchers.stream().filter(m -> m.matches(request)).collect(Collectors.counting());
+
 		if (!request.getRequestURI().equals("login") && count == 0) {
 			final String header = request.getHeader("Authorization");
-			final String[] parts = header.split(" ");
-			try {
-				final Map<String, Object> parse = jwtService.parseJwt(parts[1]);
-				final Authentication auth = new UsernamePasswordAuthenticationToken(parse.get("id"), null); 
-				SecurityContextHolder.getContext().setAuthentication(auth);
-			} catch (Exception e) {
-				e.printStackTrace();
-				final ErrorResDto<String> errorResDto = new ErrorResDto<>();
-				errorResDto.setMessage("Invalid Token");
-				response.getWriter().append(objectMapper.writeValueAsString(errorResDto));
-				response.setContentType("application/json");
-				response.setStatus(HttpStatus.UNAUTHORIZED.value());
-				return;
+			if (header != null) {
+				final String[] parts = header.split(" ");
+				try {
+					final Map<String, Object> parse = jwtService.parseJwt(parts[1]);
+					final Authentication auth = new UsernamePasswordAuthenticationToken(parse.get("id"), null);
+					SecurityContextHolder.getContext().setAuthentication(auth);
+				} catch (Exception e) {
+					e.printStackTrace();
+					final ErrorResDto<String> errorResDto = new ErrorResDto<>();
+					errorResDto.setMessage("Invalid Token");
+					response.getWriter().append(objectMapper.writeValueAsString(errorResDto));
+					response.setContentType("application/json");
+					response.setStatus(HttpStatus.UNAUTHORIZED.value());
+					return;
+				}
+			} else {
+				throw new RuntimeException("Expired Token");
 			}
+
 		}
 		filterChain.doFilter(request, response);
 	}

@@ -13,8 +13,8 @@ public class Answer extends BaseModel {
 	@Column(name = "answer", nullable = false)
 	private String answer;
 	
-	@Column(name = "answer_key", nullable = false)
-	private Boolean answerKey;
+	@Column(name = "is_answer", nullable = false)
+	private Boolean isAnswer;
 	
 	@ManyToOne
 	@JoinColumn(name = "question_id", nullable = false)
@@ -28,12 +28,12 @@ public class Answer extends BaseModel {
 		this.answer = answer;
 	}
 
-	public Boolean getAnswerKey() {
-		return answerKey;
+	public Boolean getIsAnswer() {
+		return isAnswer;
 	}
 
-	public void setAnswerKey(Boolean answerKey) {
-		this.answerKey = answerKey;
+	public void setIsAnswer(Boolean isAnswer) {
+		this.isAnswer = isAnswer;
 	}
 
 	public Question getQuestion() {

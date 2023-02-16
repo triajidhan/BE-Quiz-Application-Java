@@ -1,7 +1,11 @@
 package com.triajiramadhan.quiz.dto.question;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import com.triajiramadhan.quiz.dto.answer.AnswerUpdateReqDto;
 
 public class QuestionUpdateReqDto {
 
@@ -10,6 +14,8 @@ public class QuestionUpdateReqDto {
 	
 	@NotBlank(message = "field required")
 	private String question;
+
+	private List<AnswerUpdateReqDto> answers;
 
 	@NotNull(message = "field required")
 	private Integer version;
@@ -31,6 +37,14 @@ public class QuestionUpdateReqDto {
 
 	public void setQuestion(String question) {
 		this.question = question;
+	}
+	
+	public List<AnswerUpdateReqDto> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<AnswerUpdateReqDto> answers) {
+		this.answers = answers;
 	}
 
 	public Integer getVersion() {

@@ -27,7 +27,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
 	@Override
 	public List<User> getAll() {
-		final String sql = " SELECT * FROM t_user WHERE roleCode LIKE 'CDT'";
+		final String sql = " SELECT * FROM t_user WHERE role_code LIKE 'CDT'";
 		@SuppressWarnings("unchecked")
 		final List<User> userCandidates = em.createNativeQuery(sql, User.class).getResultList();
 		return userCandidates;

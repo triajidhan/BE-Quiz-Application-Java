@@ -4,7 +4,7 @@ public class AnswerDataDto {
 
 	private String id;
 	private String answer;
-	private Boolean answerKey;
+	private Boolean isAnswer;
 	private Integer version;
 	private Boolean isActive;
 	
@@ -15,13 +15,13 @@ public class AnswerDataDto {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	public Boolean getAnswerKey() {
-		return answerKey;
+
+	public Boolean getIsAnswer() {
+		return isAnswer;
 	}
 
-	public void setAnswerKey(Boolean answerKey) {
-		this.answerKey = answerKey;
+	public void setIsAnswer(Boolean isAnswer) {
+		this.isAnswer = isAnswer;
 	}
 
 	public String getAnswer() {

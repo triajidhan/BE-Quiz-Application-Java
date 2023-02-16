@@ -46,7 +46,7 @@ public class QuestionServiceImpl implements QuestionService {
 			Answer answerInsert = new Answer();
 			answerInsert.setQuestion(questionInsert);
 			answerInsert.setAnswer(data.getAnswers().get(i).getAnswer());
-			answerInsert.setAnswerKey(data.getAnswers().get(i).getAnswerKey());
+			answerInsert.setIsAnswer(data.getAnswers().get(i).getIsAnswer());
 			answerInsert = answerDao.insert(answerInsert);
 		}
 
@@ -69,6 +69,7 @@ public class QuestionServiceImpl implements QuestionService {
 					questionUpdate.setQuestion(data.getQuestion());
 					questionUpdate.setIsActive(data.getIsActive());
 					questionUpdate = questionDao.update(questionUpdate);
+					baseDataUpdateResDto.setId(questionUpdate.getId());
 					baseDataUpdateResDto.setVersion(questionUpdate.getVersion());
 					baseUpdateResDto.setData(baseDataUpdateResDto);
 					baseUpdateResDto.setMessage("Updating Question Success!");					
@@ -102,7 +103,7 @@ public class QuestionServiceImpl implements QuestionService {
 			for (int i = 0; i < answers.size(); i++) {
 				final AnswerDataDto answerDataDto = new AnswerDataDto();
 				answerDataDto.setAnswer(answers.get(i).getAnswer());
-				answerDataDto.setAnswerKey(answers.get(i).getAnswerKey());
+				answerDataDto.setIsAnswer(answers.get(i).getIsAnswer());
 				answerDataDto.setId(answers.get(i).getId());
 				answerDataDto.setIsActive(answers.get(i).getIsActive());
 				answerDataDto.setVersion(answers.get(i).getVersion());
@@ -133,7 +134,7 @@ public class QuestionServiceImpl implements QuestionService {
 				for (int i = 0; i < answers.size(); i++) {
 					final AnswerDataDto answerDataDto = new AnswerDataDto();
 					answerDataDto.setAnswer(answers.get(i).getAnswer());
-					answerDataDto.setAnswerKey(answers.get(i).getAnswerKey());
+					answerDataDto.setIsAnswer(answers.get(i).getIsAnswer());
 					answerDataDto.setId(answers.get(i).getId());
 					answerDataDto.setIsActive(answers.get(i).getIsActive());
 					answerDataDto.setVersion(answers.get(i).getVersion());
@@ -166,7 +167,7 @@ public class QuestionServiceImpl implements QuestionService {
 				for (int i = 0; i < answers.size(); i++) {
 					final AnswerDataDto answerDataDto = new AnswerDataDto();
 					answerDataDto.setAnswer(answers.get(i).getAnswer());
-					answerDataDto.setAnswerKey(answers.get(i).getAnswerKey());
+					answerDataDto.setIsAnswer(answers.get(i).getIsAnswer());
 					answerDataDto.setId(answers.get(i).getId());
 					answerDataDto.setIsActive(answers.get(i).getIsActive());
 					answerDataDto.setVersion(answers.get(i).getVersion());

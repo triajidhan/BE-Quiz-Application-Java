@@ -33,6 +33,7 @@ public class AnswerServiceImpl implements AnswerService {
 				if (answerUpdate.getVersion() == data.getVersion()) {
 					answerUpdate.setAnswer(data.getAnswer());
 					answerUpdate = answerDao.update(answerUpdate);
+					baseDataUpdateResDto.setId(answerUpdate.getId());
 					baseDataUpdateResDto.setVersion(answerUpdate.getVersion());
 					baseUpdateResDto.setData(baseDataUpdateResDto);
 					baseUpdateResDto.setMessage("Updating Answer Success!");					
@@ -55,7 +56,7 @@ public class AnswerServiceImpl implements AnswerService {
 		final Optional<Answer> optional = answerDao.getById(id);
 		final BaseDeleteResDto baseDeleteResDto = new BaseDeleteResDto();
 		if (optional.isPresent()) {
-			if (!optional.get().getAnswerKey()) {
+			if (!optional.get().getIsAnswer()) {
 				answerDao.deleteById(id);
 				baseDeleteResDto.setMessage("Answer Deleted Successfully!");				
 			} else {

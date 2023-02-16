@@ -55,7 +55,7 @@ public class ReportServiceImpl implements ReportService {
 		double totalCorrectAnswer = 0;
 		for (int i = 0; i < data.getSubmissions().size(); i++) {
 			final Optional<Answer> optionalAnswer = answerDao.getById(data.getSubmissions().get(i).getAnswerId());
-			if (optionalAnswer.get().getAnswerKey()) {
+			if (optionalAnswer.get().getIsAnswer()) {
 				totalCorrectAnswer += 1;
 			}	
 			Submission submissionInsert = new Submission();
@@ -92,7 +92,7 @@ public class ReportServiceImpl implements ReportService {
 				final SubmissionDataDto submissionDataDto = new SubmissionDataDto();
 				submissionDataDto.setQuestion(submissions.get(i).getAnswer().getQuestion().getQuestion());
 				submissionDataDto.setUserAnswer(submissions.get(i).getAnswer().getAnswer());
-				submissionDataDto.setResult(submissions.get(i).getAnswer().getAnswerKey());
+				submissionDataDto.setResult(submissions.get(i).getAnswer().getIsAnswer());
 				submissionDataDto.setId(submissions.get(i).getId());
 				submissionDataDto.setIsActive(submissions.get(i).getIsActive());
 				submissionDataDto.setVersion(submissions.get(i).getVersion());
@@ -103,7 +103,7 @@ public class ReportServiceImpl implements ReportService {
 				for (int j = 0; j < answers.size(); j++) {
 					final AnswerDataDto answerDataDto = new AnswerDataDto();
 					answerDataDto.setAnswer(answers.get(i).getAnswer());
-					answerDataDto.setAnswerKey(answers.get(i).getAnswerKey());
+					answerDataDto.setIsAnswer(answers.get(i).getIsAnswer());
 					answerDataDto.setId(answers.get(i).getId());
 					answerDataDto.setIsActive(answers.get(i).getIsActive());
 					answerDataDto.setVersion(answers.get(i).getVersion());
