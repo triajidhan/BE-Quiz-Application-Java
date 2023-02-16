@@ -3,11 +3,12 @@
 This is a mini project for a Quiz App on a site. Here Candidate users can take a quiz with 5 random questions provided by the application. Then you can immediately see the score obtained by the User Candidate.
 
 - There're 5 Model/Entity.
-  - User Candidate.
+  - User.
   - Question.
   - Answer.
   - Submission.
   - Report
+- User has two roles namely Admin and User Candidate.
 - User Candidate can take the quiz more than once.
 - UUID is used for id/primary key.
 
@@ -21,7 +22,8 @@ git clone https://github.com/triajidhan/BE-Quiz-Application.git
   - Make sure the database setting at application.properties are correct.
   - You can use other name, but you need to change the datasource in the application.properties.
 - Run the project. Upon the first run, the tables will automatically created in the previously created database.
-- Register user candidate using ``` POST /user-candidates ```, then login using ``` POST /login ```
+- Register user candidate using ``` POST /user-candidates ```, if you want to register as admin, fill in ``` userRole: "ADM" ```. If as a candidate user, fill in  ``` userRole: "CDT" ```
+- Then login using ``` POST /login ```
 
 ## API Documentation
 Swagger Open API Documentation. To use this, you must run the application.
@@ -43,8 +45,8 @@ POST /login
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `userName`      | `string` | **Required**. User candidate username|
-| `password`      | `string` | **Required**. User candidate password|
+| `userName`      | `string` | **Required**. User username|
+| `password`      | `string` | **Required**. User password|
 
 #### Response
 ```
@@ -57,10 +59,10 @@ POST /login
 }
 ```
 -------
-### User Candidates
+### Users
 #### Request
 ```http
-GET /user-candidates
+GET /users
 ```
 #### Response
 ```
@@ -71,6 +73,8 @@ GET /user-candidates
       "fullName": "string",
       "userName": "string",
       "email": "string",
+      "roleName": "string",
+      "roleCode": "string",
       "version": 0,
       "isActive": true
     }
@@ -80,12 +84,12 @@ GET /user-candidates
 -------
 #### Request
 ```http
-GET /user-candidates/{id}
+GET /users/{id}
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `id`      | `UUID string` | **Required**. User candidate id to fetch|
+| `id`      | `UUID string` | **Required**. User id to fetch|
 
 #### Response
 ```
@@ -95,6 +99,8 @@ GET /user-candidates/{id}
     "fullName": "string",
     "userName": "string",
     "email": "string",
+    "roleName": "string",
+    "roleCode": "string",
     "version": 0,
     "isActive": true
   }
@@ -103,7 +109,7 @@ GET /user-candidates/{id}
 -------
 #### Request
 ```http
-POST /user-candidates
+POST /users
 ```
 #### Request Body
 ```
@@ -111,16 +117,18 @@ POST /user-candidates
   "fullName": "string",
   "userName": "string",
   "password": "string",
-  "email": "string"
+  "email": "string",
+  "roleCode": "string"
 }
 ```
 
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `fullName`      | `string` | **Required**. User candidate fullname|
-| `userName`      | `string` | **Required**. User candidate username|
-| `password`      | `string` | **Required**. User candidate password|
-| `email`      | `string` | **Required**. User candidate email|
+| `fullName`      | `string` | **Required**. User fullname|
+| `userName`      | `string` | **Required**. User username|
+| `password`      | `string` | **Required**. User password|
+| `email`      | `string` | **Required**. User email|
+| `roleCode`      | `string` | **Required**. User role code(Admin = "ADM", User Candidate = "CDT")|
 
 #### Response
 ```
@@ -134,7 +142,7 @@ POST /user-candidates
 -------
 #### Request
 ```http
-PUT /user-candidates
+PUT /users
 ```
 #### Request Body
 ```
@@ -157,6 +165,7 @@ PUT /user-candidates
 ```
 {
   "data": {
+    "id": "string",
     "version": 0
   },
   "message": "string"
@@ -165,7 +174,7 @@ PUT /user-candidates
 -------
 #### Request
 ```http
-DELETE /user-candidates/{id}
+DELETE /users/{id}
 ```
 
 | Parameter | Type     | Description                       |
@@ -198,7 +207,7 @@ GET /questions
         {
           "id": "string",
           "answer": "string",
-          "answerKey": true,
+          "isAnswer": true,
           "version": 0,
           "isActive": true
         }
@@ -225,7 +234,7 @@ GET /questions/random
         {
           "id": "string",
           "answer": "string",
-          "answerKey": true,
+          "isAnswer": true,
           "version": 0,
           "isActive": true
         }
@@ -256,7 +265,7 @@ GET /questions/{id}
       {
         "id": "string",
         "answer": "string",
-        "answerKey": true,
+        "isAnswer": true,
         "version": 0,
         "isActive": true
       }
@@ -276,19 +285,19 @@ POST /questions
   "answers": [
     {
       "answer": "string",
-      "answerKey": true
+      "isAnswer": true
     },
     {
       "answer": "string",
-      "answerKey": true
+      "isAnswer": true
     },
     {
       "answer": "string",
-      "answerKey": true
+      "isAnswer": true
     },
     {
       "answer": "string",
-      "answerKey": true
+      "isAnswer": true
     }
   ]
 }
@@ -299,7 +308,7 @@ POST /questions
 | `question`      | `string` | **Required**. Question|
 | `answers`      | `array` | **Required**. Multiple choice group|
 | `answer`      | `string` | **Required**. Multiple choice|
-| `answerKey`      | `boolean` | **Required**. Correct answer|
+| `isAnswer`      | `boolean` | **Required**. Correct answer|
 
 #### Response
 ```
@@ -336,6 +345,7 @@ PUT /questions
 ```
 {
   "data": {
+    "id": "string",
     "version": 0
   },
   "message": "string"
@@ -367,6 +377,7 @@ PUT /answers
 ```
 {
   "data": {
+    "id": "string",
     "version": 0
   },
   "message": "string"
@@ -416,7 +427,7 @@ GET /reports
             {
               "id": "string",
               "answer": "string",
-              "answerKey": true,
+              "isAnswer": true,
               "version": 0,
               "isActive": true
             }
@@ -453,7 +464,7 @@ GET /reports/top-3
             {
               "id": "string",
               "answer": "string",
-              "answerKey": true,
+              "isAnswer": true,
               "version": 0,
               "isActive": true
             }
@@ -495,7 +506,7 @@ GET /reports/user-candidates?id=
             {
               "id": "string",
               "answer": "string",
-              "answerKey": true,
+              "isAnswer": true,
               "version": 0,
               "isActive": true
             }
@@ -536,7 +547,7 @@ GET /reports/{id}
           {
             "id": "string",
             "answer": "string",
-            "answerKey": true,
+            "isAnswer": true,
             "version": 0,
             "isActive": true
           }
